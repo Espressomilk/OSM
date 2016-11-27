@@ -30,7 +30,7 @@ def insertNodesPOIsNonPOIs():
         ver = node.attrib['version']
         lon = node.attrib['lon']
         lat = node.attrib['lat']
-        point = "POINT(%s %s)"%(lon, lat)
+        point = "POINT(%s %s)" % (lon, lat)
         nodeID = node.attrib['id']
         cnt += 1
         if(cnt % 1000 == 0):
@@ -71,15 +71,54 @@ def insertNodesPOIsNonPOIs():
     nodesError.close()
     poisError.close()
     nonpoisError.close()
-    
 
-def insertWays():
+# nodeID=26609107 version=-1 上海浦东国际机场
+# nodeID=26609111 version=-1 上海虹桥国际机场
+
+
+def insertWaysWayNode():
+    cnt = 0
     waysError = open('Ways_error.txt', 'w')
     for way in root.findall('way'):
-        pass
+        wayID = way.attrib['id']
+        name = "NULL"
+        isRoad = 0
+        otherInfo = []
+        cnt += 1
+        if(cnt % 1000 == 0):
+            print('%s ways inserted...' % cnt)
+        for tag in way.findall('tag'):
+            if(tag.attrib['k'] == 'name'):
+                name = tag.attrib['v']
+            elif(tag.attrib['k'] == 'highway'):
+                isRoad = 1
+            else:
+                otherInfo.append(tag.attrib)
+        if(name == "NULL"):
+            cur.execute("insert into ways(wayID, LineString, name, isRoad, otherInfo) values(%s, NULL, NULL, %s, %s)", (wayID, isRoad, str(otherInfo)))
+        else:
+            cur.execute("insert into ways(wayID, LineString, name, isRoad, otherInfo) values(%s, NULL, %s, %s, %s)", (wayID, name, isRoad, str(otherInfo)))
+        node_order = 0
+        for nd in way.findall('nd'):
+            nodeID = nd.attrib['ref']
+            node_order += 1
+            cur.execute("insert into waynode(wayID, nodeID, node_order) values(%s, %s, %s)", (wayID, nodeID, node_order))
+        db.commit()
+    waysError.close()
 
 
-if __name__ == "__main__":
+def NodeInsert():
     disableIndex(['nodes', 'pois', 'nonpois'])
     insertNodesPOIsNonPOIs()
     enableIndex(['nodes', 'pois', 'nonpois'])
+
+
+def WayInsert():
+    disableIndex(['ways', 'waynode'])
+    insertWaysWayNode()
+    enableIndex(['ways', 'waynode'])
+
+
+if __name__ == "__main__":
+    NodeInsert()
+    WayInsert()
