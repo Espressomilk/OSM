@@ -48,22 +48,22 @@ db = pymysql.connect(host="localhost", user='root', db="OSM2")
 cur = db.cursor()
 try:
     cur.execute(Ways_Create)
-except:
-    pass
+except Exception as e:
+    print("Exception", ":", e)
 try:
     cur.execute(Nodes_Create)
-except:
-    pass
+except Exception as e:
+    print("Exception", ":", e)
 try:
     cur.execute(POIs_Create)
-except:
-    pass
+except Exception as e:
+    print("Exception", ":", e)
 try:
     cur.execute(NonPOIs_Create)
-except:
-    pass
+except Exception as e:
+    print("Exception", ":", e)
 try:
     cur.execute(WayNode_Create)
-except:
-    pass
+except Exception as e:
+    print("Exception", ":", e)
 db.commit()
