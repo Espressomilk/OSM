@@ -12,9 +12,8 @@ def mapping(x,y):
     return (a,b)
 
 def calc_dist(x1,y1,x2,y2):
-        import mapping as mp
         from math import atan,tan,sin,cos,pi,sqrt,atan2,asin
-        (a1,b1)=mp.mapping(x1,y1)
-        (a2,b2)=mp.mapping(x2,y2)
+        (a1,b1)=mapping(x1,y1)
+        (a2,b2)=mapping(x2,y2)
         return sqrt((a1-a2)**2+(b1-b2)**2)
 
