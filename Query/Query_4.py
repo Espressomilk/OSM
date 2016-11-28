@@ -1,6 +1,7 @@
 import pymysql.cursors
 import operator
 import utils as ut
+import time
 db = pymysql.connect(host="localhost", user="root", db="OSM4", charset='utf8')
 cur = db.cursor()
 
@@ -90,6 +91,7 @@ if __name__ == "__main__":
     rad = 50
     print ('Q1:')
     print (Query1ByNodeID(28111460))
+
     print ('Q2:')
     print (Query2ByWayID(4531289))
     print ('Q4:')
