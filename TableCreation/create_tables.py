@@ -4,7 +4,7 @@ Ways_Create = """create table ways(
                     wayID varchar(12),
                     LineString linestring,
                     name varchar(100), index(name),
-                    isRoad boolean,
+                    isRoad varchar(100),
                     otherInfo text,
                     primary key(wayID)
                 ) ENGINE=MyISAM

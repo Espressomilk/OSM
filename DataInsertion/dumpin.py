@@ -62,7 +62,9 @@ def insertNodesPOIsNonPOIs():
                 poisError.write(nodeID)
                 poisError.write('\n')
         else:
-            otherInfo = node.findall('tag')
+            otherInfo = []
+            for tag in node.findall('tag'):
+                otherInfo.append(tag.attrib)
             try:
                 cur.execute("insert into nonpois(nodeID, position, planaxy, otherInfo) values(%s, GeomFromText(%s), GeomFromText(%s), %s)", (nodeID, point, planaxy, str(otherInfo)))
             except:
@@ -93,7 +95,7 @@ def insertWaysWayNode():
             if(tag.attrib['k'] == 'name'):
                 name = tag.attrib['v']
             elif(tag.attrib['k'] == 'highway'):
-                isRoad = 1
+                isRoad = tag.attrib['v']
             else:
                 otherInfo.append(tag.attrib)
         if(name == "NULL"):
