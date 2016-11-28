@@ -73,6 +73,12 @@ def xmlConstruction(xmlname, pois, nonpois, ways, minlat, maxlat, minlon, maxlon
     newXML.write("""</osm>""")
 
 
+def work(x1, y1, x2, y2):
+    poiresult, nonpoiresult = QueryNodesByRectangular(x1, y1, x2, y2)
+    waysresult = QueryWaysByRectangular(x1, y1, x2, y2)
+    xmlConstruction('text.xml', poiresult, nonpoiresult, waysresult, x1, y1, x2, y2)
+
+
 if __name__ == "__main__":
     poiresult, nonpoiresult = QueryNodesByRectangular(120.6, 30.9, 120.7, 31)
     waysresult = QueryWaysByRectangular(120.6, 30.9, 120.7, 31)
