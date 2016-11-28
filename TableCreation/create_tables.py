@@ -20,6 +20,7 @@ Nodes_Create = """create table nodes(
 POIs_Create = """create table POIs(
                     nodeID varchar(12),
                     position point not null, spatial index(position),
+                    planaxy point not null, spatial index(planaxy),
                     name varchar(100), index(name),
                     poitype varchar(100), index(poitype),
                     otherInfo text,
@@ -30,6 +31,7 @@ POIs_Create = """create table POIs(
 NonPOIs_Create = """create table nonPOIs(
                     nodeID varchar(12),
                     position point not null, spatial index(position),
+                    planaxy point not null, spatial index(planaxy),
                     otherInfo text,
                     primary key(nodeID)
                 ) ENGINE=MyISAM
@@ -44,7 +46,7 @@ WayNode_Create = """create table WayNode(
                     ) ENGINE=MyISAM
                     """
 
-db = pymysql.connect(host="localhost", user='root', db="OSM2")
+db = pymysql.connect(host="localhost", user='root', db="OSM4")
 cur = db.cursor()
 try:
     cur.execute(Ways_Create)
