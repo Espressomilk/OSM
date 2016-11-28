@@ -1,9 +1,9 @@
 import xml.etree.ElementTree as ET
 import pymysql.cursors
-
+import utils as ut
 tree = ET.parse('../data/shanghai_dump.osm')
 root = tree.getroot()
-db = pymysql.connect(host="localhost", user="root", db="OSM2", charset='utf8')
+db = pymysql.connect(host="localhost", user="root", db="OSM4", charset='utf8')
 cur = db.cursor()
 
 
@@ -31,6 +31,8 @@ def insertNodesPOIsNonPOIs():
         lon = node.attrib['lon']
         lat = node.attrib['lat']
         point = "POINT(%s %s)" % (lon, lat)
+        (ply,plx) = ut.mapping(float(lat),float(lon))
+        planaxy = "POINT(%f %f)" % (plx, ply)
         nodeID = node.attrib['id']
         cnt += 1
         if(cnt % 1000 == 0):
@@ -54,7 +56,7 @@ def insertNodesPOIsNonPOIs():
                     otherInfo.append(tag.attrib)
             # print("insert into pois(nodeID, position, name, poitype, otherInfo) values(%s, GeomFromText('%s'), %s, %s, %s)"% (nodeID, point, name, poitype, str(otherInfo)))
             try:
-                cur.execute("insert into pois(nodeID, position, name, poitype, otherInfo) values(%s, GeomFromText(%s), %s, %s, %s)", (nodeID, point, name, poitype, str(otherInfo)))
+                cur.execute("insert into pois(nodeID, position, planaxy, name, poitype, otherInfo) values(%s, GeomFromText(%s), GeomFromText(%s), %s, %s, %s)", (nodeID, point, planaxy, name, poitype, str(otherInfo)))
             except:
                 print('POIs Insert Error:', nodeID)
                 poisError.write(nodeID)
@@ -62,7 +64,7 @@ def insertNodesPOIsNonPOIs():
         else:
             otherInfo = node.findall('tag')
             try:
-                cur.execute("insert into nonpois(nodeID, position, otherInfo) values(%s, GeomFromText(%s), %s)", (nodeID, point, str(otherInfo)))
+                cur.execute("insert into nonpois(nodeID, position, planaxy, otherInfo) values(%s, GeomFromText(%s), GeomFromText(%s), %s)", (nodeID, point, planaxy, str(otherInfo)))
             except:
                 print('NonPOIs Insert Error:', nodeID)
                 nonpoisError.write(nodeID)
