@@ -90,8 +90,8 @@ def Query5ByLL(lat, lon):
     return ans
 
 
-def Query6By2LL(lat1, lon1, lat2, lon2):
-    mysql2xml.work()
+def Query6By2LL(filename, lat1, lon1, lat2, lon2):
+    mysql2xml.work(filename, lon1, lat1, lon2, lat2)
 
 
 if __name__ == "__main__":
@@ -100,10 +100,13 @@ if __name__ == "__main__":
     rad = 50
     print('Q1:')
     print(Query1ByNodeID(28111460))
-
     print('Q2:')
     print(Query2ByWayID(4531289))
+    print('Q3:')
+    print(Query3ByNameOfRoad('东川'))
     print('Q4:')
     print(Query4ByLLR(lat1, lon1, rad))
     print('Q5:')
     print(Query5ByLL(lat1, lon1))
+    print('Q6:')
+    Query6By2LL('../XML/text2.xml', lat1, lon1, lat2, lon2)

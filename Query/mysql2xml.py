@@ -73,10 +73,10 @@ def xmlConstruction(xmlname, pois, nonpois, ways, minlat, maxlat, minlon, maxlon
     newXML.write("""</osm>""")
 
 
-def work(x1, y1, x2, y2):
+def work(filename, x1, y1, x2, y2):
     poiresult, nonpoiresult = QueryNodesByRectangular(x1, y1, x2, y2)
     waysresult = QueryWaysByRectangular(x1, y1, x2, y2)
-    xmlConstruction('text.xml', poiresult, nonpoiresult, waysresult, x1, y1, x2, y2)
+    xmlConstruction(filename, poiresult, nonpoiresult, waysresult, x1, y1, x2, y2)
 
 
 if __name__ == "__main__":
