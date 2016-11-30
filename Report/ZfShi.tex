@@ -49,6 +49,7 @@
 \usepackage{lineno}
 
 \usepackage{xcolor,listings}
+\usepackage[colorlinks,linkcolor=black,urlcolor=black]{hyperref}
 
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
@@ -240,10 +241,39 @@ Besides index for primary keys, we built 8 indexes to accelerate the queries. Es
 \end{figure}
 
 
-\section{Position Mapping}
+\section{Point Mapping}
+The longtitude and latitude are used as the absolute coordinates. However, when calculating the distance between two points of given longtitude and latitude, we have to take spherical properties into consideration.
 
+For instance, the distance between $(30.4, 122.1)$ and $(30.4, 122.6)$ is $48.0073$ Km. The distance between $(32.4, 122.1)$ and $(32.4, 122.6)$ is $46.995$ Km. There would be a error about $1$ Km if we ignore the spherical properties of the Earth.
+
+\subsection{Different Ways of Calculating Distances Between Two Given Coordinates}
+\begin{enumerate}
+\item[a)] Vincenty's formulae are two related iterative methods used in geodesy to calculate the distance between two points on the surface of a spheroid, developed by Thaddeus Vincenty (1975). They are based on the assumption that the figure of the Earth is an oblate spheroid, and hence are more accurate than methods that assume a spherical Earth.
+For simplicity and focus on the course related work, here we only provide the link to the Vincenty’s paper without further explanation. 
+(\url{http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf})
+
+\item[b)] Another approach is to map latitude-longitude coordinates to plana coordinates and then calculate the distance in between. We used the definition of Miller’s cylindrical projection, which is more accurate near the equator. Further about the derivation please see the original paper. (\url{http://www.jstor.org/stable/210384})
+\end{enumerate}
+
+\subsection{Implementation}
+We randomly sampled the start and the destination and got the distribution of the distance error derived using two methods. We concluded that the Vincenty distance, which is more accurate, was 0.66~1.15 times of the Miller distance. This is further explored in our Query 4 and Query 5 design.
+
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Vincenty.png}
+      \caption{Relative error between miller distance and vincenty distance}
+      \label{fig:Vincenty}
+\end{figure}
 
 \section{Solution to Required Queries}
+\begin{enumerate}
+  \item Give a node, return all ways taht contain it, and infer whether the node is an intersection of roads, i.e., a crossroad.
+  \item Given a way, return all the nodes along the way.
+  \item Search the name of the road and return information of those matched.
+  \item Query the POIs within a radius of a given location (Longtitude-latitude coordinates).
+  \item Find the closest road to a given GPS coordinate.
+  \item Implement an API to return the XML in osm format defined in the wiki page, given a rectangular area bounding box (x1, y1, x2, y2) as parameters.
+\end{enumerate}
 
 
 \section{Extended Queries}
