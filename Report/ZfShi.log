@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.11.26)  30 NOV 2016 15:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.11.26)  30 NOV 2016 22:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -500,42 +500,42 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
  (./ZfShi.aux)
 \openout1 = `ZfShi.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 72.
-LaTeX Font Info:    Try loading font information for OML+txmi on input line 72.
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 76.
+LaTeX Font Info:    Try loading font information for OML+txmi on input line 76.
 
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/omltxmi.fd
 File: omltxmi.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 72.
-LaTeX Font Info:    Try loading font information for OMS+txsy on input line 72.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 76.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 76.
+LaTeX Font Info:    Try loading font information for OMS+txsy on input line 76.
 
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/omstxsy.fd
 File: omstxsy.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 72.
-LaTeX Font Info:    Try loading font information for OMX+txex on input line 72.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 76.
+LaTeX Font Info:    Try loading font information for OMX+txex on input line 76.
 
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/omxtxex.fd
 File: omxtxex.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 72.
-LaTeX Font Info:    Try loading font information for U+txexa on input line 72.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 76.
+LaTeX Font Info:    Try loading font information for U+txexa on input line 76.
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/utxexa.fd
 File: utxexa.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Try loading font information for OT1+txr on input line 72.
+LaTeX Font Info:    ... okay on input line 76.
+LaTeX Font Info:    Try loading font information for OT1+txr on input line 76.
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/ot1txr.fd
 File: ot1txr.fd 2000/12/15 v3.1
@@ -634,43 +634,43 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \c@lstlisting=\count119
-LaTeX Font Info:    Try loading font information for U+txmia on input line 125.
+LaTeX Font Info:    Try loading font information for U+txmia on input line 129.
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/utxmia.fd
 File: utxmia.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 125.
+LaTeX Font Info:    Try loading font information for U+msa on input line 129.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 125.
+LaTeX Font Info:    Try loading font information for U+msb on input line 129.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+txsyc on input line 125.
+LaTeX Font Info:    Try loading font information for U+txsyc on input line 129.
 
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/utxsyc.fd
 File: utxsyc.fd 2000/12/15 v3.1
 )
-LaTeX Font Info:    Try loading font information for OT1+txss on input line 133
+LaTeX Font Info:    Try loading font information for OT1+txss on input line 137
 .
 
 (c:/texlive/2016/texmf-dist/tex/latex/txfonts/ot1txss.fd
 File: ot1txss.fd 2000/12/15 v3.1
 )
 LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
-(Font)              scaled to size 4.74998pt on input line 133.
+(Font)              scaled to size 4.74998pt on input line 137.
 
-Overfull \hbox (25.49643pt too wide) in paragraph at lines 145--145
-[]\OT1/cmtt/m/n/10 python SZZ_install [-h] [-c host] [-u user] [-p passwd] [-n 
-dbname] [-i input][] 
+Overfull \hbox (41.24629pt too wide) in paragraph at lines 150--150
+[]\OT1/cmtt/m/n/10 python SZZ_install.py [-h] [-c host] [-u user] [-p passwd] [
+-n dbname] [-i input][] 
  []
 
 
-Overfull \hbox (20.24648pt too wide) in paragraph at lines 145--145
+Overfull \hbox (20.24648pt too wide) in paragraph at lines 150--150
 []                     \OT1/cmtt/m/n/10 -i:  inputfile path, for instance '../s
 hanghai_dump.osm'[] 
  []
@@ -678,25 +678,31 @@ hanghai_dump.osm'[]
 [1
 
 {c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-(./ZfShi.bbl) [3] (./ZfShi.aux) ) 
+<R-tree.png, id=15, 946.53625pt x 810.02625pt>
+File: R-tree.png Graphic file (type png)
+ <use R-tree.png>
+Package pdftex.def Info: R-tree.png used on input line 237.
+(pdftex.def)             Requested size: 216.81pt x 185.5358pt.
+ (./ZfShi.bbl)
+[3 <./R-tree.png>] (./ZfShi.aux) ) 
 Here is how much of TeX's memory you used:
- 5199 strings out of 493014
- 69714 string characters out of 6137000
- 146963 words of memory out of 5000000
- 8633 multiletter control sequences out of 15000+600000
- 25737 words of font info for 65 fonts, out of 8000000 for 9000
+ 5209 strings out of 493014
+ 69815 string characters out of 6137000
+ 146971 words of memory out of 5000000
+ 8639 multiletter control sequences out of 15000+600000
+ 27053 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,5n,35p,237b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2016/texmf-dist/fonts/enc/dvips/ba
-se/8r.enc}<c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
-><c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb><c:/texlive/20
-16/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2016/texmf-dist/f
-onts/type1/urw/times/utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/tim
-es/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ZfShi.pdf (3 pages, 71561 bytes).
+ 38i,6n,35p,710b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2016/texmf-dist/fonts/enc/dvips/b
+ase/8r.enc}<c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pf
+b><c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb><c:/texlive/2
+016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/texlive/2016/texmf-dist/
+fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/ti
+mes/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ZfShi.pdf (3 pages, 100773 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 42 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

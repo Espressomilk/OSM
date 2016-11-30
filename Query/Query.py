@@ -1,10 +1,11 @@
+#-*-coding:utf8-*-
 import pymysql.cursors
 import operator
 import utils as ut
 import time
 import mysql2xml
 
-db = pymysql.connect(host="localhost", user="root", db="OSM4", charset='utf8')
+db = pymysql.connect(host="localhost", user="root", db="OSM", charset='utf8')
 cur = db.cursor(pymysql.cursors.DictCursor)
 
 
@@ -37,13 +38,13 @@ def Query2ByWayID(wayID):
 def Query3ByNameOfRoad(name):
     cur.execute("select * from ways where name like('%%%s%%')" % name)
     result = cur.fetchall()
-    print(result)
+    # print(result)
     return result
 
 
 def Query4ByLLR(lat, lon, rad):
     rad_ori = rad
-    rad = rad*1.33
+    rad = rad * 1.33
     (y, x) = ut.mapping(lat, lon)
     cur.execute("set @poly='Polygon((%f %f,%f %f,%f %f,%f %f,%f %f))'" % (x - rad, y + rad, x + rad, y + rad, x + rad, y - rad, x - rad, y - rad, x - rad, y + rad))
     cur.execute('select nodeID,ST_AsText(position),name,poitype from POIs where MBRContains(ST_GeomFromText(@poly),planaxy)')
@@ -62,7 +63,7 @@ def Query4ByLLR(lat, lon, rad):
 def Query5ByLL(lat, lon):
     (y, x) = ut.mapping(lat, lon)
     rad_ori = 10
-    rad = rad_ori*1.33
+    rad = rad_ori * 1.33
     queryResult = []
     flag = 1
     ans = []
@@ -102,15 +103,17 @@ if __name__ == "__main__":
     (lat1, lon1) = (31.2629820000, 121.5345790000)
     (lat2, lon2) = (31.2626770000, 121.5353520000)
     rad = 50
-    print('Q1:')
-    print(Query1ByNodeID(28111460))
+    # print('Q1:')
+    # print(Query1ByNodeID(28111460))
     print('Q2:')
+    start = time.time()
     print(Query2ByWayID(4531289))
-    print('Q3:')
-    print(Query3ByNameOfRoad('p'))
-    print('Q4:')
-    print(Query4ByLLR(lat1, lon1, rad))
-    print('Q5:')
-    print(Query5ByLL(lat1, lon1))
-    print('Q6:')
-    Query6By2LL('../XML/text2.xml', lat1, lon1, lat2, lon2)
+    end = time.time()
+    # print('Q3:')
+    # print(Query3ByNameOfRoad('东川路'))
+    # print('Q4:')
+    # print(Query4ByLLR(lat1, lon1, rad))
+    # print('Q5:')
+    # print(Query5ByLL(lat1, lon1))
+    # print('Q6:')
+    # Query6By2LL('../XML/text2.xml', lat1, lon1, lat2, lon2)

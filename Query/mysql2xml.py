@@ -1,7 +1,7 @@
 #-*-coding:utf8-*-
 import pymysql.cursors
 
-db = pymysql.connect(host="localhost", user="root", db="OSM2", charset='utf8')
+db = pymysql.connect(host="localhost", user="root", db="OSM", charset='utf8')
 cur = db.cursor(pymysql.cursors.DictCursor)
 
 

@@ -1,17 +1,18 @@
 # Fdb version 3
-["bibtex ZfShi"] 1480489309 "ZfShi.aux" "ZfShi.bbl" "ZfShi" 1480489310
-  "ZfShi.aux" 1480489310 1157 2a5e891a42891df4131f71e5b37f2433 ""
+["bibtex ZfShi"] 1480515343 "ZfShi.aux" "ZfShi.bbl" "ZfShi" 1480515396
+  "ZfShi.aux" 1480515395 1284 5dbefe72971e28600a9037a4900371d2 ""
   "ZfShi.bcf" 0 -1 0 ""
   "c:/texlive/2016/texmf-dist/bibtex/bib/gloss/sample.bib" 1480091907 2721 b88105703bd616b4f9867992219afb8a ""
   "model1-num-names.bst" 0 -1 0 ""
   (generated)
-  "ZfShi.blg"
   "ZfShi.bbl"
-["pdflatex"] 1480489309 "ZfShi.tex" "ZfShi.pdf" "ZfShi" 1480489310
-  "ZfShi.aux" 1480489310 1157 2a5e891a42891df4131f71e5b37f2433 ""
-  "ZfShi.bbl" 1480489309 0 d41d8cd98f00b204e9800998ecf8427e "bibtex ZfShi"
-  "ZfShi.spl" 1480489309 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "ZfShi.tex" 1480489305 19842 0e8a1fbcffcda5b3ba93c63734660502 ""
+  "ZfShi.blg"
+["pdflatex"] 1480515394 "ZfShi.tex" "ZfShi.pdf" "ZfShi" 1480515396
+  "R-tree.png" 1480515387 36979 61573e357cbb54e3740213875801a38e ""
+  "ZfShi.aux" 1480515395 1284 5dbefe72971e28600a9037a4900371d2 ""
+  "ZfShi.bbl" 1480515344 0 d41d8cd98f00b204e9800998ecf8427e "bibtex ZfShi"
+  "ZfShi.spl" 1480515394 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "ZfShi.tex" 1480515391 10116 a80ea9728dd58ed02a7a01272d55d8f2 ""
   "c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480091636 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1480091857 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1480092862 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -106,7 +107,7 @@
   "c:/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1480093405 3869748 ac997d69a06c7eee8883c33620a3084b ""
   "c:/texlive/2016/texmf.cnf" 1480093293 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   (generated)
-  "ZfShi.pdf"
-  "ZfShi.log"
-  "ZfShi.spl"
   "ZfShi.aux"
+  "ZfShi.log"
+  "ZfShi.pdf"
+  "ZfShi.spl"

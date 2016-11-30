@@ -168,8 +168,14 @@ INPUT c:/texlive/2016/texmf-dist/fonts/tfm/public/txfonts/rtxphvr.tfm
 INPUT c:/texlive/2016/texmf-dist/fonts/tfm/public/txfonts/rtxss.tfm
 INPUT c:/texlive/2016/texmf-dist/fonts/vf/public/txfonts/txmi.vf
 INPUT c:/texlive/2016/texmf-dist/fonts/tfm/public/txfonts/rtxmi.tfm
+INPUT R-tree.png
+INPUT ./R-tree.png
+INPUT ./R-tree.png
 INPUT ZfShi.bbl
 INPUT ZfShi.bbl
+INPUT c:/texlive/2016/texmf-dist/fonts/vf/public/txfonts/txr.vf
+INPUT c:/texlive/2016/texmf-dist/fonts/tfm/public/txfonts/rtxptmr.tfm
+INPUT c:/texlive/2016/texmf-dist/fonts/tfm/public/txfonts/rtxr.tfm
 INPUT ZfShi.aux
 INPUT c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
