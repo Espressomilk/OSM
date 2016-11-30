@@ -18,14 +18,18 @@
 %% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
 %% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
 %%
+
 % \documentclass[preprint,12pt]{elsarticle}
+
 
 %% Use the option review to obtain double line spacing
 %% \documentclass[preprint,review,12pt]{elsarticle}
 
 %% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
 %% for a journal layout:
+
 \documentclass[final,1p,times]{elsarticle}
+
 %% \documentclass[final,1p,times,twocolumn]{elsarticle}
 %% \documentclass[final,3p,times]{elsarticle}
 %% \documentclass[final,3p,times,twocolumn]{elsarticle}
@@ -137,6 +141,7 @@ Python 3 + pymysql
 Enter the root path of this project, run the following command in the shell:
 \begin{verbatim}
 python SZZ_install.py [-h] [-c host] [-u user] [-p passwd] [-n dbname] [-i input]
+
                      -c:  host connect, for instance 'localhost'
                      -u:  username for mysql, for instance 'root'
                      -p:  password for mysql, ignore this if no password
@@ -171,6 +176,7 @@ CREATE TABLE ways(
 CREATE TABLE nodes(
                     nodeID VARCHAR(12),
                     version TINYINT(1), INDEX(version),
+                    version BOOLEAN,
                     PRIMARY KEY(nodeID)
                 ) ENGINE=MyISAM
                 
