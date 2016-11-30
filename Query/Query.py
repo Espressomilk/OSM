@@ -42,6 +42,8 @@ def Query3ByNameOfRoad(name):
 
 
 def Query4ByLLR(lat, lon, rad):
+    rad_ori = rad
+    rad = rad*1.33
     (y, x) = ut.mapping(lat, lon)
     cur.execute("set @poly='Polygon((%f %f,%f %f,%f %f,%f %f,%f %f))'" % (x - rad, y + rad, x + rad, y + rad, x + rad, y - rad, x - rad, y - rad, x - rad, y + rad))
     cur.execute('select nodeID,ST_AsText(position),name,poitype from POIs where MBRContains(ST_GeomFromText(@poly),planaxy)')
@@ -51,15 +53,16 @@ def Query4ByLLR(lat, lon, rad):
         coordinate = row['ST_AsText(position)'].strip().split(' ')
         lons = float(coordinate[0][6:])
         lats = float(coordinate[1][:-1])
-        d = ut.calc_dist(lat, lon, lats, lons)
-        if d <= rad:
+        d = ut.vin_dist(lat, lon, lats, lons)
+        if d <= rad_ori:
             ans.append((row['nodeID'], (lons, lats), row['name'], row['poitype'], d))
     return(sorted(ans, key=operator.itemgetter(4)))
 
 
 def Query5ByLL(lat, lon):
     (y, x) = ut.mapping(lat, lon)
-    rad = 10
+    rad_ori = 10
+    rad = rad_ori*1.33
     queryResult = []
     flag = 1
     ans = []
@@ -72,8 +75,8 @@ def Query5ByLL(lat, lon):
             coordinate = row['ST_AsText(position)'].strip().split(' ')
             lons = float(coordinate[0][6:])
             lats = float(coordinate[1][:-1])
-            d = ut.calc_dist(lat, lon, lats, lons)
-            if d <= rad:
+            d = ut.vin_dist(lat, lon, lats, lons)
+            if d <= rad_ori:
                 ans.append((row['nodeID'], (lons, lats), d))
         ls = (sorted(ans, key=operator.itemgetter(2)))
         for each in ls:
@@ -86,7 +89,8 @@ def Query5ByLL(lat, lon):
         if flag == 0:
             break
         else:
-            rad = rad * 2.7
+            rad_ori = rad_ori * 2.7
+            rad = rad_ori * 1.33
     return ans
 
 
@@ -103,7 +107,7 @@ if __name__ == "__main__":
     print('Q2:')
     print(Query2ByWayID(4531289))
     print('Q3:')
-    print(Query3ByNameOfRoad('东川'))
+    print(Query3ByNameOfRoad('p'))
     print('Q4:')
     print(Query4ByLLR(lat1, lon1, rad))
     print('Q5:')
