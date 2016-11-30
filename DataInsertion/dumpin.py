@@ -1,9 +1,35 @@
 import xml.etree.ElementTree as ET
 import pymysql.cursors
 import utils as ut
-tree = ET.parse('../data/shanghai_dump.osm')
+import sys
+import getopt
+
+opts, args = getopt.getopt(sys.argv[1:], "c:u:p:n:i:")
+_host = ""
+_user = ""
+_passwd = ""
+_dbname = ""
+inputdata = "./"
+for op, value in opts:
+    if(op == "-c"):
+        _host = value
+    elif(op == "-u"):
+        _user = value
+    elif(op == "-p"):
+        _passwd = value
+    elif(op == "-n"):
+        _dbname = value
+    elif(op == "-i"):
+        inputdata += value
+
+print(_host, _user, _passwd, _dbname, inputdata)
+tree = ET.parse(inputdata)
 root = tree.getroot()
-db = pymysql.connect(host="localhost", user="root", db="OSM4", charset='utf8')
+if(_passwd == ""):
+    db = pymysql.connect(host=_host, user=_user, db=_dbname, charset='utf8')
+else:
+    db = pymysql.connect(host=_host, user=_user, db=_dbname, passwd=_passwd, charset='utf8')
+
 cur = db.cursor()
 
 
@@ -31,7 +57,7 @@ def insertNodesPOIsNonPOIs():
         lon = node.attrib['lon']
         lat = node.attrib['lat']
         point = "POINT(%s %s)" % (lon, lat)
-        (ply,plx) = ut.mapping(float(lat),float(lon))
+        (ply, plx) = ut.mapping(float(lat), float(lon))
         planaxy = "POINT(%f %f)" % (plx, ply)
         nodeID = node.attrib['id']
         cnt += 1
@@ -121,7 +147,6 @@ def WayInsert():
     disableIndex(['ways', 'waynode'])
     insertWaysWayNode()
     enableIndex(['ways', 'waynode'])
-
 
 if __name__ == "__main__":
     NodeInsert()

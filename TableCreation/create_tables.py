@@ -12,7 +12,7 @@ Ways_Create = """create table ways(
 
 Nodes_Create = """create table nodes(
                     nodeID varchar(12),
-                    version boolean,
+                    version tinyint(1), index(version),
                     primary key(nodeID)
                 ) ENGINE=MyISAM
                """
@@ -46,26 +46,28 @@ WayNode_Create = """create table WayNode(
                     ) ENGINE=MyISAM
                     """
 
-db = pymysql.connect(host="localhost", user='root', db="OSM4")
-cur = db.cursor()
-try:
-    cur.execute(Ways_Create)
-except Exception as e:
-    print("Exception", ":", e)
-try:
-    cur.execute(Nodes_Create)
-except Exception as e:
-    print("Exception", ":", e)
-try:
-    cur.execute(POIs_Create)
-except Exception as e:
-    print("Exception", ":", e)
-try:
-    cur.execute(NonPOIs_Create)
-except Exception as e:
-    print("Exception", ":", e)
-try:
-    cur.execute(WayNode_Create)
-except Exception as e:
-    print("Exception", ":", e)
-db.commit()
+
+def create_tables(_host, _user, _passwd, _dbname):
+    db = pymysql.connect(host=_host, user=_user, passwd=_passwd, db=_dbname)
+    cur = db.cursor()
+    try:
+        cur.execute(Ways_Create)
+    except Exception as e:
+        print("Exception", ":", e)
+    try:
+        cur.execute(Nodes_Create)
+    except Exception as e:
+        print("Exception", ":", e)
+    try:
+        cur.execute(POIs_Create)
+    except Exception as e:
+        print("Exception", ":", e)
+    try:
+        cur.execute(NonPOIs_Create)
+    except Exception as e:
+        print("Exception", ":", e)
+    try:
+        cur.execute(WayNode_Create)
+    except Exception as e:
+        print("Exception", ":", e)
+    db.commit()
