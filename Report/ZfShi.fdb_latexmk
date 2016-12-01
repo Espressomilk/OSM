@@ -1,20 +1,21 @@
 # Fdb version 3
-["bibtex ZfShi"] 1480522816 "ZfShi.aux" "ZfShi.bbl" "ZfShi" 1480522819
-  "ZfShi.aux" 1480522818 2676 564a09a01a7eee3a14ad9696ca89cda6 ""
+["bibtex ZfShi"] 1480566687 "ZfShi.aux" "ZfShi.bbl" "ZfShi" 1480567766
+  "ZfShi.aux" 1480567765 3106 1eaed0f33c226289ca6f3363cca70487 ""
   "ZfShi.bcf" 0 -1 0 ""
   "c:/texlive/2016/texmf-dist/bibtex/bib/gloss/sample.bib" 1480091907 2721 b88105703bd616b4f9867992219afb8a ""
   "model1-num-names.bst" 0 -1 0 ""
   (generated)
   "ZfShi.bbl"
   "ZfShi.blg"
-["pdflatex"] 1480522817 "ZfShi.tex" "ZfShi.pdf" "ZfShi" 1480522819
-  "R-tree.png" 1480515387 36979 61573e357cbb54e3740213875801a38e ""
-  "Vincenty.png" 1480517659 93867 d50d37fe6ea4e3552321513948b96895 ""
-  "ZfShi.aux" 1480522818 2676 564a09a01a7eee3a14ad9696ca89cda6 ""
-  "ZfShi.bbl" 1480522816 0 d41d8cd98f00b204e9800998ecf8427e "bibtex ZfShi"
-  "ZfShi.out" 1480522818 979 1650f4f35671facb582db06c750afed3 ""
-  "ZfShi.spl" 1480522817 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "ZfShi.tex" 1480522356 12800 361daaa517968c328e3570d36730f6b9 ""
+["pdflatex"] 1480567763 "ZfShi.tex" "ZfShi.pdf" "ZfShi" 1480567766
+  "ER.pdf" 1480564016 194349 83716e0b9a2079a28f3871587ce71570 ""
+  "R-tree.png" 1480553400 36979 61573e357cbb54e3740213875801a38e ""
+  "Vincenty.png" 1480553400 93867 d50d37fe6ea4e3552321513948b96895 ""
+  "ZfShi.aux" 1480567765 3106 1eaed0f33c226289ca6f3363cca70487 ""
+  "ZfShi.bbl" 1480566688 0 d41d8cd98f00b204e9800998ecf8427e "bibtex ZfShi"
+  "ZfShi.out" 1480567765 1034 be2a3af8fd595c57ff34d13529807a12 ""
+  "ZfShi.spl" 1480567764 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "ZfShi.tex" 1480567762 19424 07566e73f7da47e0e08c13c25a5b6023 ""
   "c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480091636 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "c:/texlive/2016/texmf-dist/fonts/map/fontname/texfonts.map" 1480091857 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "c:/texlive/2016/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1480092862 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -49,6 +50,7 @@
   "c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxi.pfb" 1480093074 6787 30821c47455d94d84f9e6f5bfecd086a ""
   "c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb" 1480093074 13806 49b888f4605a088e66b9eb4fee320a6e ""
   "c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb" 1480093074 6339 e2b78706efdc360ee6aec9b6e20211a7 ""
+  "c:/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsy.pfb" 1480093074 20336 69267d8a81bca8b24c9b42694a4a28f9 ""
   "c:/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb" 1480091951 44648 23115b2a545ebfe2c526c3ca99db8b95 ""
   "c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1480093001 44729 fea0975e20ec51c992338362f05f1146 ""
   "c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb" 1480093001 46026 687528a208fbfc1f00832bb96cccebbb ""
@@ -116,9 +118,10 @@
   "c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1480093307 1908524 9994669902f5159941d747b8a9490348 ""
   "c:/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt" 1480093405 3869748 ac997d69a06c7eee8883c33620a3084b ""
   "c:/texlive/2016/texmf.cnf" 1480093293 673 4ae7b2f49cee444c5343a45b5d0f169c ""
+  "tree.png" 1480565862 16904 296f183175d0b6099ec5a6beddeaf89b ""
   (generated)
   "ZfShi.log"
   "ZfShi.out"
-  "ZfShi.pdf"
   "ZfShi.spl"
+  "ZfShi.pdf"
   "ZfShi.aux"

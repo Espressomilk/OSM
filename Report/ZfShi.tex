@@ -29,7 +29,8 @@
 %% for a journal layout:
 
 \documentclass[final,1p,times]{elsarticle}
-
+\usepackage{geometry}
+\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
 %% \documentclass[final,1p,times,twocolumn]{elsarticle}
 %% \documentclass[final,3p,times]{elsarticle}
 %% \documentclass[final,3p,times,twocolumn]{elsarticle}
@@ -111,11 +112,10 @@
 \author{Hongru Zhu}
 \author{Chang Zhou}
 
-\address{jack.shi2013@gmail.com}
+\address{5130309777, 5130309784, 5130309787}
 
 \begin{abstract}
-%% Text of abstract
-
+OpenStreetMap powers map data on thousands of web sites, mobile apps, and hardware devices. It is built by a community of mappers that contribute and maintain data about roads, trails, cafés, railway stations, and much more, all over the world. Our task is to load the OpenStreetMap data into MySQL database system, and make suitable tables, indexes and queries for them.
 \end{abstract}
 
 \begin{keyword}
@@ -137,7 +137,15 @@ OSM \sep Database
 %% main text
 \section{Usage}
 \subsection{Environment}
-Python 3 + pymysql 
+Python 3 + pymysql
+\subsection{File Structure}
+The following tree demonstrate the useful files in the folders, other files can be ignored.
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=6cm]{tree.png}
+      \caption{Tree for files}
+      \label{fig:tree}
+\end{figure}
 \subsection{Install}
 Enter the root path of this project, run the following command in the shell:
 \begin{verbatim}
@@ -159,11 +167,16 @@ python SZZ_install -c localhost -u root -n OSM -i data/shanghai_dump.osm
 
 \section{Database Design}
 
-\subsection{XML Parsing}
-
 \subsection{E-R Model}
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{ER.pdf}
+      \caption{Entity Relationship Diagram}
+      \label{fig:ER}
+\end{figure}
 
 \subsection{SQL For Table Creation}
+\emph{Codes are in `$OSM/TableCreation/create\_tables.py$'}
 \begin{verbatim}
 CREATE TABLE ways(
           			wayID VARCHAR(12),
@@ -209,6 +222,8 @@ create table WayNode(
 \end{verbatim}
 
 \subsection{Data Insertion}
+\emph{Codes are in `$OSM/DataInsertion/dumpin.py$'}\\
+
 For the data we parsed from XML, we inserted them into corresponding fields of our created tables.
 
 Notably, if we insert the data directly into the table, the insertion time complexity would be $O(log(N))$, where N is the entries already existed in the table, due to the index (primary key) building process.
@@ -231,7 +246,7 @@ The SQL code is as follows:
 
 The \textbf{LOCK TABLE} is to make sure no other users are writing at the same time.
 \subsection{Index}
-Besides index for primary keys, we built 8 indexes to accelerate the queries. Especially, in order to speed up the spatial queries, we applied Spatial Index in MySQL. For \emph{MyISAM} tables, Spatial Index creates an R-tree index. The key idea of the R-tree is to group nearby objects and represent them with their minimum bounding rectangle in the next higher level of the tree. For storage engines that support non-spatial indexing of spatial columns, the engine creates a B-tree index. A B-tree index on spatial values is useful for exact-value lookups, but not for range scans. In our cases, the R-tree is more suitable because required query 4, 5, 6 all include range scans.
+Besides index for primary keys, we built 8 indexes to accelerate the queries. Especially, in order to speed up the spatial queries, we applied Spatial Index in MySQL. For \textbf{MyISAM} tables, Spatial Index creates an R-tree index. The key idea of the R-tree is to group nearby objects and represent them with their minimum bounding rectangle in the next higher level of the tree. For storage engines that support non-spatial indexing of spatial columns, the engine creates a B-tree index. A B-tree index on spatial values is useful for exact-value lookups, but not for range scans. In our cases, the R-tree is more suitable because required query 4, 5, 6 all include range scans.
 
 \begin{figure}[thpb]
       \centering
@@ -266,21 +281,123 @@ We randomly sampled the start and the destination and got the distribution of th
 \end{figure}
 
 \section{Solution to Required Queries}
+\emph{Codes are in `$OSM/Query/Query.py$'}
 \begin{enumerate}
-  \item Give a node, return all ways taht contain it, and infer whether the node is an intersection of roads, i.e., a crossroad.
-  \item Given a way, return all the nodes along the way.
-  \item Search the name of the road and return information of those matched.
-  \item Query the POIs within a radius of a given location (Longtitude-latitude coordinates).
-  \item Find the closest road to a given GPS coordinate.
-  \item Implement an API to return the XML in osm format defined in the wiki page, given a rectangular area bounding box (x1, y1, x2, y2) as parameters.
+  \item Given a node, return all ways that contain it, and infer whether the node is an intersection of roads, i.e., a crossroad.\\
+  \textbf{Solution:} This query is simple. Based on the given node ID, we go to table `waynode' to find the corresponding way ID, and extract information about this way ID in table `ways'.\\
+  We have compared the speed of two queries:
+  \begin{verbatim}
+    SELECT * FROM ways 
+        WHERE wayID IN 
+        (SELECT wayID FROM waynode WHERE nodeID=givenNodeID);
+    or
+    SELECT wayID, LineString, name, isRoad, otherInfo 
+        FROM ways NATURAL JOIN waynode 
+        WHERE waynode.nodeID=givenNodeID;
+  \end{verbatim}
+  The corresponding runtimes are $0.72 s$ and $8.29 s$. Therefore, we choose to use the first solution instead of the second one. 
+  \item Given a way, return all the nodes along the way.\\
+  \textbf{Solution:} To realise this query, we designed a solution to lookup the tables multiple times. Firstly, we go to table `waynode' to find the corresponding node ID based on the given way ID. Then find the detail information for these nodes in `POIs' and `Non-POIs'.
+  Similar to query 1, we find the solution using the following SQL is faster than using JOIN.
+  \begin{verbatim}
+    tmpResult$\leftarrow$SELECT * FROM nodes 
+                            WHERE nodeID IN 
+                            (SELECT nodeID 
+                                FROM waynode 
+                                WHERE wayID=givenWayID);
+    result=[];
+    for row in tmpResult:
+      if(row['version']==1):
+        tmp$\leftarrow$SELECT nodeID, AsText(position) AS position, name, poitype, otherinfo 
+                          FROM pois 
+                          WHERE nodeID=row['nodeID'];
+        result.append(tmp);
+      else:
+        tmp$\leftarrow$SELECT nodeID, AsText(position) AS position, otherInfo 
+                          FROM nonpois 
+                          WHERE nodeID=row['nodeID'];
+        result.append(tmp);
+  \end{verbatim}
+  \item Search the name of the road and return information of those matched.\\
+  \textbf{Solution:} This query only involve one table `ways'. The SQL is simple as follows:
+  \begin{verbatim}
+    SELECT * FROM ways WHERE name LIKE ('%input_string%');
+  \end{verbatim}
+  In order to speed up the query process, we built index for `name' in `ways'.
+  \item Query the POIs within a radius of a given location (Longtitude-latitude coordinates).\\
+  \textbf{Solution:} In this query, we first convert given coordinate to `planaxy', and draw a circle with a larger radius than required, namely 1.33 times of the original radius. This is to ensure that all nodes within the radius under Vincenty distance will always be included. According to our simulation above. Later we use spatial index to scan for all nodes in a polygon that perfectly circumscribe the desired circle. After we got all possible nodes, we use a linear time examination to find all nodes within the original radius. The core SQL commands responsible for this query are:
+  \begin{verbatim}
+    SET @poly='Polygon((x-rad, y+rad, 
+                        x+rad, y+rad, 
+                        x+rad, y-rad, 
+                        x-rad, y-rad, 
+                        x-rad, y+rad))';
+    SELECT nodeID, ST_AsText(position), name, poitype
+            FROM POIs
+            WHERE MBRContains(ST_GeomFromText(@poly), planaxy);
+  \end{verbatim}
+  \item Find the closest road to a given GPS coordinate.\\
+  \textbf{Solution:} In this query, we first convert given coordinate to `planaxy', and draw a circle with a larger radius than required simiar to Query 4. Next we use a iterative method to find at least on NONPOI point which is closest to the tartget GPS coordinate. To improve efficiency and fast our search, we use an exponentially growing raidus, starting from 10 meters as the initial radius. In the $i^{th}$ attempt, we will search in a circle with radius $10e^{i-1}$ meters. We use the same technique as the above to use the spatial index in a polygon and run filters to get desired answer. The core SQL commands responsible for this query are:
+  \begin{verbatim}
+    SET @poly=`Polygon((x-rad, y+rad, 
+                        x+rad, y+rad, 
+                        x+rad, y-rad, 
+                        x-rad, y-rad, 
+                        x-rad, y+rad))';
+    SELECT nodeID, ST_AsText(position)
+        FROM nonPOIs
+        WHERE MBRContains(ST_GeomFromText(@poly), planaxy);
+    SELECT ways.wayid, ways.name, ways.isRoad, ways.otherInfo
+        FROM waynode, ways
+        WHERE waynode.nodeid=NID and waynode.wayid=ways.wayid and ways.isroad<>'0';
+  \end{verbatim}
+  \item Implement an API to return the XML in osm format defined in the wiki page, given a rectangular area bounding box (x1, y1, x2, y2) as parameters.\\
+  \textbf{Solution:} In this query, we firstly get all the nodes information from `nodes', `pois' and `nonpois'. Then we go to table `waynode' and `ways' to find information of included ways.
+  \begin{verbatim}
+    SET @poly='Polygon((x1, y1, 
+                        x1, y2, 
+                        x2, y2, 
+                        x2, y1, 
+                        x1, y1))';
+    SELECT nodeID, AsText(position) as position, name, poitype, otherInfo 
+        FROM pois 
+        WHERE MBRContains(GeomFromText(@poly), position);
+    SELECT nodeID, AsText(position) as position, otherInfo 
+        FROM nonpois 
+        WHERE MBRContains(GeomFromText(@poly), position);
+
+    SELECT wayID, name, isRoad, otherInfo 
+        FROM ways 
+        WHERE wayID in 
+        (SELECT DISTINCT wayID 
+            FROM nonpois 
+            NATURAL JOIN waynode 
+            WHERE MBRContains(GeomFromText(@poly), position));
+    SELECT wayID, name, isRoad, otherInfo
+        FROM ways
+        WHERE wayID in 
+        (SELECT DISTINCT wayID 
+            FROM pois 
+            NATURAL JOIN waynode 
+            WHERE MBRContains(GeomFromText(@poly), position));
+  \end{verbatim}
+  Then we follow the format defined in the wiki page to output the xml file. In this process, we query the node IDs corresponding a way ID.
+  \begin{verbatim}
+    SELECT nodeID, node_order FROM waynode
+        WHERE wayID=givenWayID order by node_order;
+  \end{verbatim}
 \end{enumerate}
-
-
 \section{Extended Queries}
 
 
 \section{Human Computer Interaction}
 
+\section{Division of Work}
+\textbf{Zhenfeng Shi:} Schema designing; Database, table, index creation; Required query 1, 2, 3, 6.\\
+
+\textbf{Hongru Zhu:} Algorithms dealing with geo-spatial data designing; Required query 4, 5.\\
+
+\textbf{Chang Zhou:} Demonstration and interfaces; Extended queries. 
 
 
 

@@ -21,6 +21,15 @@ def Query1ByNodeID(nodeID):
     return isIntersection, queryResult
 
 
+# def Query1ByNodeID2(nodeID):
+#     cur.execute('select wayID, LineString, name, isRoad, otherInfo from ways natural join waynode where waynode.nodeID=%s' % nodeID)
+#     queryResult = cur.fetchall()
+#     isIntersection = 0
+#     if(len(queryResult) > 1):
+#         isIntersection = 1
+#     return isIntersection, queryResult
+
+
 def Query2ByWayID(wayID):
     cur.execute('select * from nodes where nodeID in (select nodeID from waynode where wayID=%s)' % wayID)
     result = cur.fetchall()
@@ -106,12 +115,17 @@ if __name__ == "__main__":
     (lat1, lon1) = (31.2629820000, 121.5345790000)
     (lat2, lon2) = (31.2626770000, 121.5353520000)
     rad = 50
-    # print('Q1:')
-    # print(Query1ByNodeID(28111460))
-    print('Q2:')
     start = time.time()
-    print(Query2ByWayID(4531289))
-    end = time.time()
+    print('Q1:')
+    print(Query1ByNodeID(28111460))
+    # end = time.time()
+    # print("Time consume:" + str(end - start))
+    # print(Query1ByNodeID2(28111460))
+    # print("Time consume:" + str(time.time() - end))
+    # print('Q2:')
+    # start = time.time()
+    # print(Query2ByWayID(4531289))
+    # end = time.time()
     # print('Q3:')
     # print(Query3ByNameOfRoad('东川路'))
     # print('Q4:')

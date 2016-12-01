@@ -1,0 +1,19 @@
+.
+├── DataInsertion
+│   ├── dumpin.py
+│   └── utils.py
+├── Query
+│   ├── calc_dist.py
+│   ├── mysql2xml.py
+│   ├── Query.py
+│   └── utils.py
+├── readme.md
+├── Report
+│   └── Group10_FinalReport.pdf
+├── SZZ_install.py
+├── TableCreation
+│   ├── create_database.py
+│   └── create_tables.py
+└── XML
+    ├── text2.xml
+    └── text.xml
