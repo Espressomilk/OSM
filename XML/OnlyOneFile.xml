@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="SZZ_IMAP 0.0.1">
+ <bounds minlat="121.534579" minlon="121.535352" maxlat="31.262982" maxlon="31.262677"/>
+  <node id="376673" lat="31.2629025" lon="121.5353207" visible="true" version="1">
+   <tag k="name" v="松潘路135弄19号"/>
+   <tag k="source" v="baidu"/>
+  </node>
+  <node id="301866399" lat="31.262767" lon="121.5350931" visible="true" version="-1"/>
+  <node id="1873427484" lat="31.2627232" lon="121.5346213" visible="true" version="-1"/>
+  <node id="1873427501" lat="31.2627391" lon="121.5348545" visible="true" version="-1"/>
+  <node id="1873427509" lat="31.2627392" lon="121.534742" visible="true" version="-1"/>
+  <node id="1873427572" lat="31.2627415" lon="121.5346964" visible="true" version="-1"/>
+  <node id="1873427596" lat="31.2627049" lon="121.5345891" visible="true" version="-1"/>
+  <node id="1873427600" lat="31.2627186" lon="121.5348117" visible="true" version="-1"/>
+  <node id="62745277" lat="31.2629683" lon="121.5347012" visible="true" version="-1"/>
+  <node id="1873427481" lat="31.2628447" lon="121.5349217" visible="true" version="-1"/>
+  <node id="1873427565" lat="31.2627392" lon="121.5346562" visible="true" version="-1"/>
+  <way id="74446193" visible="true">
+   <nd ref="301865372"/>
+   <nd ref="1873427496"/>
+   <nd ref="301865936"/>
+   <nd ref="1873427619"/>
+   <nd ref="301865935"/>
+   <nd ref="301866399"/>
+   <nd ref="301866546"/>
+   <tag k="highway" v="primary"/>
+   <tag k="name" v="宁国路"/>
+   <tag k="oneway" v="yes"/>
+   <tag k="name:en" v="Ningguo Road"/>
+   <tag k="cycleway" v="lane"/>
+  </way>
+  <way id="176857168" visible="true">
+   <nd ref="1873427561"/>
+   <nd ref="1873427596"/>
+   <nd ref="1873427484"/>
+   <nd ref="1873427565"/>
+   <nd ref="1873427572"/>
+   <nd ref="1873427509"/>
+   <nd ref="1873427600"/>
+   <nd ref="1873427592"/>
+   <tag k="highway" v="residential"/>
+   <tag k="name" v="杭州路"/>
+   <tag k="oneway" v="yes"/>
+   <tag k="name:en" v="Hangzhou Road"/>
+  </way>
+  <way id="176866876" visible="true">
+   <nd ref="1873480323"/>
+   <nd ref="62660543"/>
+   <nd ref="62660545"/>
+   <nd ref="1873427617"/>
+   <nd ref="1873427483"/>
+   <nd ref="1873427537"/>
+   <nd ref="68684748"/>
+   <nd ref="78594093"/>
+   <nd ref="475647368"/>
+   <nd ref="62745271"/>
+   <nd ref="1873427479"/>
+   <nd ref="1873427563"/>
+   <nd ref="62745272"/>
+   <nd ref="62745275"/>
+   <nd ref="62745276"/>
+   <nd ref="62745277"/>
+   <nd ref="1873427501"/>
+   <nd ref="62745278"/>
+   <nd ref="62745279"/>
+   <nd ref="1873427475"/>
+   <nd ref="62745280"/>
+   <nd ref="62745281"/>
+   <tag k="highway" v="trunk"/>
+   <tag k="name" v="内环高架路"/>
+   <tag k="lanes" v="2"/>
+   <tag k="layer" v="1"/>
+   <tag k="bridge" v="yes"/>
+   <tag k="oneway" v="yes"/>
+   <tag k="name:en" v="Inner Ring Elevated Road"/>
+  </way>
+  <way id="8886591" visible="true">
+   <nd ref="62655499"/>
+   <nd ref="1873427472"/>
+   <nd ref="62658872"/>
+   <nd ref="1873427539"/>
+   <nd ref="1873427575"/>
+   <nd ref="62658873"/>
+   <nd ref="62658875"/>
+   <nd ref="1873427481"/>
+   <nd ref="1873427605"/>
+   <nd ref="1873427523"/>
+   <nd ref="62658876"/>
+   <nd ref="1873427545"/>
+   <nd ref="62658877"/>
+   <nd ref="1873427535"/>
+   <nd ref="1873427505"/>
+   <nd ref="62658878"/>
+   <nd ref="475647527"/>
+   <nd ref="1873427507"/>
+   <nd ref="62658879"/>
+   <nd ref="1873427632"/>
+   <nd ref="1873427554"/>
+   <nd ref="1873427499"/>
+   <nd ref="62658881"/>
+   <nd ref="1873480147"/>
+   <tag k="highway" v="trunk"/>
+   <tag k="name" v="内环高架路"/>
+   <tag k="lanes" v="3"/>
+   <tag k="layer" v="1"/>
+   <tag k="bridge" v="yes"/>
+   <tag k="oneway" v="yes"/>
+   <tag k="name:en" v="Inner Ring Elevated Road"/>
+   <tag k="maxspeed" v="80"/>
+  </way>
+</osm>

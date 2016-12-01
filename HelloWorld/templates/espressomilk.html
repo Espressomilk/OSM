@@ -1,0 +1,188 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Espressionmilk - Free Search in Shanghai</title>
+
+  <link href="/static/css/base.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/leaflet.css" />
+  <script src="/static/js/leaflet.js"></script>
+  <style type="text/css">
+    body {
+      background-image:url(/static/images/background.jpg);
+      background-repeat: repeat;
+      background-attachment: fixed;
+    }
+    #mapid {width: 45%; height:600px; padding:30px; margin:30px}
+    .search{border:2px solid #ffb61e;height:35px;margin:40px auto 0;width:530px;}
+    .search select{display:none;}
+    .search .select_box{font-size:14px;color:#555555;width:100px;line-height:35px;float:left;position:relative;left:0px}
+    .search .select_showbox{height:35px;background:url(/static/images/search_ico.png) no-repeat 80px center;text-indent:1.5em;}
+    .search .select_showbox.active{background:url(/static/images/search_ico_hover.png) no-repeat 80px center;}
+    .search .select_option{border:2px solid #ffb61e;border-top:none;display:none;left:-2px;top:35px;position:absolute;z-index:99;background:#fff;}
+    .search .select_option li{text-indent:1.5em;width:90px;cursor:pointer;}
+    .search .select_option li.selected{background-color:#F3F3F3;color:#999;}
+    .search .select_option li.hover{background:#BEBEBE;color:#fff;}
+
+    .search input.inp_srh,.search input.btn_srh{border:none;background:none;height:35px;line-height:35px;float:left;font-size:18px}
+    .search input.inp_srh{outline:none;width:365px;}
+    .search input.btn_srh{background:#ffb61e;color:#FFF;font-family:"Arial";font-size:18px;width:65px;}
+    ::-moz-placeholder { color: #369; }
+    ::-webkit-input-placeholder { color:#369; }
+    :-ms-input-placeholder { color:#369; }
+
+    .mainpart{width:35%;border:0px solid #ffb61e;padding:40px}
+    .querydetail{font-size:24px;color:#000000;font-family:"Helvetica";font-weight:bold; margin-left:5px;margin-right:20px}
+    .opformat{font-size:16px;color:#010101;font-family:"Helvetic";margin:10px}
+    .iterformat{border-top:1px solid #EEEEEE;padding-top:4px;padding-bottom:4px;padding-left:10px}
+  </style>
+</head>
+<body>
+<div role="banner" id="top">
+  <div style="float:left">
+    <img src="/static/images/1480517717_2.png" height="120" align="top"></img>
+  </div>
+  <div>
+    <img src="/static/images/logo.png" height="160"></img>
+  </div>
+</div>
+<div class="search radius6">
+  <form action="/query-post/" method="post">
+  {% csrf_token %}
+    <select name="queryno" id="choose">
+      <option value="Query1">Query1</option>
+      <option value="Query2">Query2</option>
+      <option value="Query3">Query3</option>
+      <option value="Query4">Query4</option>
+      <option value="Query5">Query5</option>
+      <option value="Query6">Query6</option>
+    </select>
+    <input class="inp_srh" type="text" name="q" placeholder="Please enter nodeID" onfocus="this.placeholder=''" onblur="this.placeholder='Please enter nodeID'">
+    <input class="btn_srh" type="submit" name="submit" value="Submit">
+  </form>
+</div>
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.select.js"></script>
+<div  class={{ class233 }} style="float:left">
+  <div class="querydetail">
+    {{ querydetail }}
+  </div>
+  <div class="opformat">
+  {% if resultflag == 0 %}
+    <p> Sorry! No matched result.</p>
+  {% endif %}
+  {% if resultflag == 1 %}
+    {% if itsct == 1 %}
+      <p> It is an intersection. </p>
+    {% else %}
+      <p> It is not an intersection. </p>
+    {% endif %}
+    {% for row in rlt %}
+      <div class="iterformat">
+        <li>wayID: {{ row.wayID }}</li>
+        <li>LineString: {{ row.LineString}}</li>
+        <li>name: {{ row.name }}</li>
+        <li>isRoad: {{ row.isRoad}}</li>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if resultflag == 2 %}
+    {% for row in rlt %}
+      <div class="iterformat">
+        <li>nodeID: {% for rr in row %}{{ rr.nodeID }}{% endfor %}</li>
+        <li>position: {% for rr in row %}{{ rr.position }}{% endfor %}</li>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if resultflag == 3 %}
+    {% for row in rlt %}
+      <div class="iterformat">
+        <li>wayID: {{ row.wayID }}</li>
+        <li>LineString: {{ row.LineString}}</li>
+        <li>name: {{ row.name }}</li>
+        <li>isRoad: {{ row.isRoad}}</li>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if resultflag == 4 %}
+    {% for row in rlt %}
+      <div class="iterformat">
+        <li>poiID: {{ row.0 }}</li>
+        <li>name: {{ row.2 }}</li>
+        <li>coordinates: {{ row.1 }}</li>
+        <li>tag: {{ row.3 }}</li>
+        <li>distance: {{ row.4 }}m</li>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if resultflag == 5 %}
+    <p>The closest road: </p>
+    {% for row in rlt %}
+      <div class="iterformat">
+        <li>wayID: {{ row.wayid }}</li>
+        <li>name: {{ row.name }}</li>
+        <li>isRoad: {{ row.isRoad }}</li>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% if resultflag == 6 %}
+    The xml file can be <a href="/fileDownload/">download</a> here.
+  {% endif %}
+  {% if resultflag == 8 %}
+    <p>Wrong Format</p>
+  {% endif %}
+  {% if resultflag == 9 %}
+    <p>Cong, You find the way out of the maze</p>
+  {% endif %}
+  </div>
+</div>
+<div id="mapid" style="float:right">
+  {% if resultflag == 2 %}
+  <script>
+  var mymap = L.map('mapid').setView([{{ coord_x|safe }}, {{ coord_y|safe }}], 11);
+  L.marker([{{ coord_x|safe }}, {{ coord_y|safe }}]).addTo(mymap);
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'mapbox.streets'
+  }).addTo(mymap)
+  </script>
+  {% elif resultflag == 4 %}
+  <script>
+  var mymap = L.map('mapid').setView([{{ poi_x|safe }}, {{ poi_y|safe }}], 20);
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'mapbox.streets'
+  }).addTo(mymap)
+
+  var circle = L.circle([{{ poi_x|safe }}, {{ poi_y|safe }}], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: {{ radius|safe }}
+  }).addTo(mymap);
+  var coord = {{ coord|safe }}
+  for (ec in coord){
+    L.marker([coord[ec][1][1], coord[ec][1][0]]).addTo(mymap);
+  }
+  </script>
+  {% else %}
+  <script>
+  var mymap = L.map('mapid').setView([31.22, 121.48], 11);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
+     maxZoom: 18,
+     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+       '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+       'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+     id: 'mapbox.streets'
+   }).addTo(mymap)
+  </script>
+  {% endif %}
+</div>
+</body>
+</html>
