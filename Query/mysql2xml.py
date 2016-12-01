@@ -1,7 +1,10 @@
 #-*-coding:utf8-*-
 import pymysql.cursors
+import json
 
-db = pymysql.connect(host="localhost", user="root", db="OSM", charset='utf8')
+with open('mysqlinfo.json', 'r') as f:
+    mysqlinfo = json.load(f)
+db = pymysql.connect(host=mysqlinfo["host"], user=mysqlinfo["user"], password=mysqlinfo["password"], db=mysqlinfo["db"], charset='utf8')
 cur = db.cursor(pymysql.cursors.DictCursor)
 
 
@@ -24,7 +27,7 @@ def QueryWaysByRectangular(x1, y1, x2, y2):
     part2 = cur.fetchall()
     if(len(part1) > 0 and len(part2) > 0):
         return part1 + part2
-    if(len(part1) > 0): 
+    if(len(part1) > 0):
         return part1
     return part2
 

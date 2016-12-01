@@ -1,6 +1,7 @@
 import os
 import sys
 import getopt
+import json
 
 from TableCreation.create_database import *
 from TableCreation.create_tables import *
@@ -46,3 +47,6 @@ if __name__ == "__main__":
         os.system('python ./DataInsertion/dumpin.py -c %s -u %s -n %s -i %s' % (host, user, dbname, inputdata))
     else:
         os.system('python ./DataInsertion/dumpin.py -c %s -u %s -p %s -n %s -i %s' % (host, user, passwd, dbname, inputdata))
+
+    with open('mysqlinfo.json', 'w') as f:
+        json.dump({"host":host,"user":user,"password":passwd,"db":dbname}, f)

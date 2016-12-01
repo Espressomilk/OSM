@@ -4,8 +4,11 @@ import operator
 import utils as ut
 import time
 import mysql2xml
+import json
 
-db = pymysql.connect(host="localhost", user="root", db="OSM", charset='utf8')
+with open('mysqlinfo.json', 'r') as f:
+    mysqlinfo = json.load(f)
+db = pymysql.connect(host=mysqlinfo["host"], user=mysqlinfo["user"], password=mysqlinfo["password"], db=mysqlinfo["db"], charset='utf8')
 cur = db.cursor(pymysql.cursors.DictCursor)
 
 
