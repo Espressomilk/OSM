@@ -30,7 +30,7 @@
 
 \documentclass[final,1p,times]{elsarticle}
 \usepackage{geometry}
-\geometry{left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+\geometry{left=2cm, right=2cm, top=1.5cm, bottom=1.5cm}
 %% \documentclass[final,1p,times,twocolumn]{elsarticle}
 %% \documentclass[final,3p,times]{elsarticle}
 %% \documentclass[final,3p,times,twocolumn]{elsarticle}
@@ -137,7 +137,7 @@ OSM \sep Database
 %% main text
 \section{Usage}
 \subsection{Environment}
-Python 3 + pymysql
+MySQL + Python 3 + pymysql + Firefox + Django + leaflet
 \subsection{File Structure}
 The following tree demonstrate the useful files in the folders, other files can be ignored.
 \begin{figure}[thpb]
@@ -164,6 +164,63 @@ python SZZ_install -c localhost -u root -n OSM -i data/shanghai_dump.osm
 \end{verbatim}
 
 \subsection{Queries}
+Website Overview\\
+
+A part: logo part. Our website is called Espressionmilk having a wish that your experience in using our website could be as silky as sipping a cup of Espressionmilk.\\
+
+B part: query type select \& search input. Here you can select query type and input content\\
+
+C part: result output in detail. It contains all the useful information in a clearer view.\\
+
+D part: result output on map. It gives reader an intuitive view of the result on the map.
+
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{weboverivew.png}
+      \caption{Website Overview}
+      \label{fig:WO}
+\end{figure}
+
+You need to install Django at first. Before using the website, you have to start the server:
+\begin{verbatim}
+              python manage.py runserver
+\end{verbatim}
+
+Then enter the address in your browser: http://localhost:8000/query-post.
+
+You can use select menu to choose the query type.\\
+\fbox{%  
+  \parbox{\textwidth}{%  
+      Query 1\\
+      input format: nodeID\\
+      You can get a sentence indicate whether it is an intersection and a table of the wayID that contains this node.
+
+      Query 2\\
+      input format: wayID\\
+      You can get nodeID of the nodes along this way
+
+      Query 3\\
+      input format: string\\
+      You can get the road which has the name contains this string
+
+      Query 4\\
+      input format: longtitude/latitude/radius\\
+      Note that each value should be connected by “/”\\
+      You can get a list of POIs details meanwhile you can also have a direct view of their position on the online map.
+
+      Query 5\\
+      input format: longtitude/latitude\\
+      Note that each value should be connected by “/”\\
+      You can get the information of the closest road which is the nearest to your input position.
+
+      Query 6\\
+      input format: longtitude/latitude/ longtitude/latitude\\
+      Note that each value should be connected by “/”\\
+      After submit, we will process the xml file writing in the server and you can get a download link in our website. 
+  }%  
+}  
+
+
 
 \section{Database Design}
 
@@ -387,17 +444,92 @@ We randomly sampled the start and the destination and got the distribution of th
         WHERE wayID=givenWayID order by node_order;
   \end{verbatim}
 \end{enumerate}
-\section{Extended Queries}
 
 
-\section{Human Computer Interaction}
+\section{Interface}
+\subsection{Django Framework}
+We use Django Framework to design website. Django is an excellent Python Web framework based on MVC model which can be convenient to both query function and interface designing. Here we mainly talk about how our website communicate with query functions in the server and how our website make use of these result to create pretty appearance.
+\begin{enumerate}
+  \item[a.] We only have one web page. All the actions are performed in one page.
+
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{code1.png}
+      \caption{Controller}
+      \label{fig:Vincenty}
+\end{figure}
+
+  One is for our homepage while the other is for our download link which will be included in Download Function
+  \item[b.] Basic interaction variable\\
+      We mainly have two input variable and two output variable.\\
+      The input variable contains query type and query content. Combined these two variables, the server could know which query to choose and execute it with the corresponding input.\\
+      The output variable contains query result in string type and query result in number type. The string type result can be used in C part. To pursue a clearer view, we rearrange the result so that their attributes can be stick out a mile. The number type results are mainly made up of coordinates which are used to represent the points and areas on the map plugin.
+\end{enumerate}
+\newpage
+\subsection{Optimized Input Form}
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Q2.png}
+      \caption{Select menu}
+      \label{fig:q2}
+\end{figure}
+
+Our input form is characteristic. All the query inputs are entered in the same form. The query type can be selected in the select form. When you select one type, the place holder will also change to remind your input format.
+
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Q3Q4.png}
+      \caption{Query3 and Query4 indication}
+      \label{fig:q3}
+\end{figure}
+
+We use JQuery to manage its action. When user select a query type, it will trigger a series of actions: change the value of query type, change the content of placeholder.
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=12cm]{Q5.png}
+      \caption{JQuery}
+      \label{fig:q5}
+\end{figure}
+\newpage
+\subsection{Download Function}
+The query 6 requires us to writing a xml file. In order to present our work in website, we produce download function. The rough idea is to write the xml file and then use wrapper function to send it to the user.
+
+Model part of MVC: it mainly deals with the process of reading and wrapping. It finally returns a download response.
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Q6.png}
+      \caption{Model of MVC}
+      \label{fig:q6}
+\end{figure}
+Controller part of MVC: it monitors the front operations and when it detects the prescribed link, it will tell the model part to execute the corresponding function.
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Q7.png}
+      \caption{Controll of MVC}
+      \label{fig:q7}
+\end{figure}
+View part of MVC: a quite simple hyperlink.
+\begin{figure}[thpb]
+      \centering
+      \includegraphics[width=14cm]{Q8.png}
+      \caption{View of MVC}
+      \label{fig:q8}
+\end{figure}
+\subsection{Map Plugin}
+We use leaflet, an open-source web map plugin in javascipt to produce our map function. The main function is to denote the positions and areas on the map.
+We first create a map view centered with the corresponding coordinates. Then we pick out the positions according to the result. In the end, we can’t forget to add the authority so that the map function can be loaded.
+\begin{center}
+      \includegraphics[width=14cm]{Q9.png}
+\end{center}
+
+
 
 \section{Division of Work}
 \textbf{Zhenfeng Shi:} Schema designing; Database, table, index creation; Required query 1, 2, 3, 6.\\
 
 \textbf{Hongru Zhu:} Algorithms dealing with geo-spatial data designing; Required query 4, 5.\\
 
-\textbf{Chang Zhou:} Demonstration and interfaces; Extended queries. 
+\textbf{Chang Zhou:} Demonstration and interfaces.
 
 
 

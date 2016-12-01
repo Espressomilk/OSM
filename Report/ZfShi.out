@@ -12,6 +12,9 @@
 \BOOKMARK [2][-]{subsection.3.1}{Different Ways of Calculating Distances Between Two Given Coordinates}{section.3}% 12
 \BOOKMARK [2][-]{subsection.3.2}{Implementation}{section.3}% 13
 \BOOKMARK [1][-]{section.4}{Solution to Required Queries}{}% 14
-\BOOKMARK [1][-]{section.5}{Extended Queries}{}% 15
-\BOOKMARK [1][-]{section.6}{Human Computer Interaction}{}% 16
-\BOOKMARK [1][-]{section.7}{Division of Work}{}% 17
+\BOOKMARK [1][-]{section.5}{Interface}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{Django Framework}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.2}{Optimized Input Form}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.3}{Download Function}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.4}{Map Plugin}{section.5}% 19
+\BOOKMARK [1][-]{section.6}{Division of Work}{}% 20

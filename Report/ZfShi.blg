@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2016/W32TeX)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ZfShi.aux
 I couldn't open style file model1-num-names.bst
----line 41 of file ZfShi.aux
+---line 54 of file ZfShi.aux
  : \bibstyle{model1-num-names
  :                           }
 I'm skipping whatever remains of this command
