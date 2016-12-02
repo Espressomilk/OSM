@@ -1,6 +1,7 @@
 # Install
-python SZZ_install [-h] [-c host] [-u user] [-p passwd] [-n dbname] [-i input]
-
+   
+    python SZZ_install [-h] [-c host] [-u user] [-p passwd] [-n dbname] [-i input]
+                     
                      -c:  host connect, for instance 'localhost'
                      
                      -u:  username for mysql, for instance 'root'
